@@ -199,9 +199,9 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
         // Mouse scroll
         if (clockwise) {
-            tap_code(KC_WH_U);
-        } else {
             tap_code(KC_WH_D);
+        } else {
+            tap_code(KC_WH_U);
         }
     }
     else if (index == 1) {
