@@ -31,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |  Bksp  |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   C  |   V  |   B  | Raise| Space|  | Del  |  Ent |   N  |   M  | ,  < | . >  | /  ? |  - _   |
+ * | LShift |   Z  |   X  |   C  |   V  |   B  |Rse/Sp|  Del |  | Del  |Lw/Ent|   N  |   M  | ,  < | . >  | /  ? |  - _   |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        | GUI  | Alt  |LShift| Ent  | Ctrl |  | Ctrl | Space|LShift| Tab  | Play/|
  *                        |      |      |      | Lower| Bksp |  | Bksp | Raise|      |      | Pause|
@@ -40,8 +40,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT(
       LT(_ADJUST, KC_ESC),       KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_PIPE,
       KC_BSPC,                   KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-      KC_LSFT,                   KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   MO(_RAISE),   KC_SPACE, KC_DEL, KC_ENT, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
-                       KC_LGUI, KC_LALT, KC_LSFT, LT(_LOWER, KC_ENT), MT(MOD_LCTL, KC_BSPC), MT(MOD_LCTL, KC_BSPC), LT(_RAISE, KC_SPACE), KC_LSFT, KC_TAB, KC_MPLY
+      KC_LSFT,                   KC_Z,   KC_X,   KC_C,   KC_V,   KC_B, LT(_RAISE, KC_SPACE), KC_DEL, KC_DEL, MT(_LOWER, KC_ENT), KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
+                       KC_LGUI, KC_LALT, KC_LSFT, LT(_LOWER, KC_ENT), MT(MOD_LCTL, KC_BSPC),  MT(MOD_LCTL, KC_BSPC), LT(_RAISE, KC_SPACE), KC_LSFT, KC_TAB, KC_MPLY
     ),
 /*
  * Lower Layer: Symbols
@@ -53,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |        |  %   |  ^   |  [   |  ]   |  ~   | Raise|      |  |      |      |   &  |  =   |  ,   |  .   |  / ? | - _    |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |  ;   |  =   |  |  =   |  ;   |      |      |      |
+ *                        |      |      |      |  ;   |  =   |  |      |  N/A |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
@@ -61,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE,                                     _______, _______, _______, _______, _______, KC_BSLS,
       _______, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_GRV,                                      KC_PLUS, KC_MINS, KC_SLSH, KC_ASTR, KC_PERC, KC_QUOT,
       _______, KC_PERC, KC_CIRC, KC_LBRC, KC_RBRC, KC_TILD, MO(_RAISE), _______, _______, _______, KC_AMPR, KC_EQL,  KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
-                                 _______, _______, _______, KC_SCLN, KC_EQL,  KC_EQL,  KC_SCLN, _______, _______, _______
+                                 _______, _______, _______, KC_SCLN, KC_EQL,  KC_EQL,  KC_NO, _______, _______, _______
     ),
 /*
  * Raise Layer: Number keys, media, navigation
@@ -71,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+------|
  * |        |      | Left | Down | Right|  End |                              |   .  |  4   |  5   |  6   |  +   |  -   |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- * |        |      |      |      |      |      |      |      |  |      |      |  0   |  1   |  2   |  3   |  *   |   /  |
+ * |        |      |      |      |      |      |      |      |  |      | Lower|  0   |  1   |  2   |  3   |  *   |   /  |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+--------------------'
  *                        |      |      |      | N/A  |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
