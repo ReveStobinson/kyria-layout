@@ -15,6 +15,9 @@
  */
 #include QMK_KEYBOARD_H
 
+bool is_alt_tab_active = false;
+uint16_t alt_tab_timer = 0;
+
 enum layers {
     _QWERTY = 0,
     _LOWER,
@@ -31,17 +34,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |  Bksp  |   A  |   S  |  D   |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  ' "   |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   C  |   V  |   B  |Rs/Ent|  Del |  | Del  |Lower |   N  |   M  | ,  < | . >  | /  ? |  - _   |
+ * | LShift |   Z  |   X  |   C  |   V  |   B  | Raise|  Del |  | Del  |Lower |   N  |   M  | ,  < | . >  | /  ? |  - _   |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | GUI  | Alt  |LShift| Space| Ctrl |  | Enter| Space|LShift| Tab  | Play/|
- *                        |      |      |      | Lower|      |  |      | Raise|      |      | Pause|
+ *                        | GUI  | Alt  |LShift| Space| Ctrl/|  | Ctrl/| Space|LShift| Tab  | Play/|
+ *                        |      |      |      | Lower| Enter|  | Enter| Raise|      |      | Pause|
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
       LT(_ADJUST, KC_ESC),       KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                                         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_PIPE,
       KC_BSPC,                   KC_A,   KC_S,   KC_D,   KC_F,   KC_G,                                         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
       KC_LSFT,                   KC_Z,   KC_X,   KC_C,   KC_V,   KC_B, LT(_RAISE, KC_ENT), KC_DEL, KC_DEL, LT(_LOWER, KC_BSPC), KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS,
-                       KC_LGUI, KC_LALT, KC_LSFT, LT(_LOWER, KC_SPACE), KC_LCTL,  KC_ENT, LT(_RAISE, KC_SPACE), KC_LSFT, KC_TAB, KC_MPLY
+                       KC_LGUI, KC_LALT, KC_LSFT, LT(_LOWER, KC_SPACE), MT(MOD_LCTL, KC_ENT),  MT(MOD_LCTL, KC_ENT), LT(_RAISE, KC_SPACE), KC_LSFT, KC_TAB, KC_MPLY
     ),
 /*
  * Lower Layer: Symbols
@@ -197,11 +200,17 @@ void oled_task_user(void) {
 #ifdef ENCODER_ENABLE
 void encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
-        // Mouse scroll
+        // Window scroll
         if (clockwise) {
-            tap_code(KC_WH_D);
+            if (!is_alt_tab_active) {
+                is_alt_tab_active = true;
+                register_code(KC_LALT);
+            }
+            alt_tab_timer = timer_read();
+            tap_code16(KC_TAB);
         } else {
-            tap_code(KC_WH_U);
+            alt_tab_timer = timer_read();
+            tap_code16(S(KC_TAB));
         }
     }
     else if (index == 1) {
@@ -213,6 +222,16 @@ void encoder_update_user(uint8_t index, bool clockwise) {
         }
     }
 }
+
+void matrix_scan_user(void) {
+  if (is_alt_tab_active) {
+    if (timer_elapsed(alt_tab_timer) > 1000) {
+      unregister_code(KC_LALT);
+      is_alt_tab_active = false;
+    }
+  }
+}
+
 #endif
 
 
