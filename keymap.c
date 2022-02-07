@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Raise Layer: Number keys, media, navigation
  *
  * ,-------------------------------------------.                              ,-----------------------------------------.
- * |  Caps  |      |Dsk L |  Up  | Dsk R| Home |                              | Bksp |  7   |  8   |  9   |  =   | Ent  |
+ * |  GUI   |      |Dsk L |  Up  | Dsk R| Home |                              | Bksp |  7   |  8   |  9   |  =   | Ent  |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+------|
  * |        |      | Left | Down | Right|  End |                              |   .  |  4   |  5   |  6   |  +   |  -   |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_RAISE] = LAYOUT(
-      _______, _______, C(G(KC_LEFT)), KC_UP, C(G(KC_RGHT)), KC_HOME,                                     KC_BSPC,    KC_7,    KC_8,    KC_9, KC_EQL,   KC_ENT,
+      KC_LGUI, _______, C(G(KC_LEFT)), KC_UP, C(G(KC_RGHT)), KC_HOME,                                     KC_BSPC,    KC_7,    KC_8,    KC_9, KC_EQL,   KC_ENT,
       _______, _______, KC_LEFT,       KC_DOWN, KC_RGHT,     KC_END,                                      KC_DOT,     KC_4,    KC_5,    KC_6, KC_PLUS, KC_MINS,
       _______, _______, _______,       KC_COMM, KC_SPACE,    _______, _______, _______, _______, _______,    KC_0,    KC_1,    KC_2,    KC_3, KC_ASTR, KC_SLSH,
                                        _______, _______,     KC_NO,   _______, _______, _______, _______, _______, _______, _______
