@@ -26,7 +26,7 @@ enum layers {
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-/* 
+/*
  * Base Layer: QWERTY
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
@@ -209,6 +209,10 @@ void encoder_update_user(uint8_t index, bool clockwise) {
             alt_tab_timer = timer_read();
             tap_code16(KC_TAB);
         } else {
+            if (!is_alt_tab_active) {
+                is_alt_tab_active = true;
+                register_code(KC_LALT);
+            }
             alt_tab_timer = timer_read();
             tap_code16(S(KC_TAB));
         }
