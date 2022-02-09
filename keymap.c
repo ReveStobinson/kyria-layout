@@ -82,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, _______, C(G(KC_LEFT)), KC_UP, C(G(KC_RGHT)), KC_HOME,                                     KC_BSPC,    KC_7,    KC_8,    KC_9, KC_SLSH, KC_ENT,
       _______, KC_LGUI,    KC_LEFT,    KC_DOWN,  KC_RGHT,  KC_END,                                         KC_EQL,    KC_4,    KC_5,    KC_6, KC_ASTR, KC_PLUS,
       _______, _______,     _______,    KC_COMM, KC_SPACE, _______, _______, _______, _______, _______,      KC_0,    KC_1,    KC_2,    KC_3, KC_DOT,  KC_MINS,
-                                       _______, _______, _______, KC_NO, _______, _______, _______, _______, _______, _______
+                                       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 /*
  * Adjust Layer: Function keys, RGB
